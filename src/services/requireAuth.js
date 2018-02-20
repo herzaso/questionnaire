@@ -1,28 +1,23 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
-import firebase from 'firebase';
-import { auth } from './firebase';
 
 export default function requireAuth(Component) {
   class AuthenticatedComponent extends React.Component {
-    componentDidMount() {
-      this.checkAuth();
+    componentDidUpdate(nextProps, nextState) {
+      if (nextProps.ready !== this.props.ready) this.checkAuth();
     }
 
     checkAuth() {
-      console.log(auth, auth.currentUser);
       if (!this.props.user) {
-        console.log(this.props);
-        const location = this.props.location;
-        const redirect = location.pathname + location.search;
-
-        this.props.history.push(`/login?redirect=${redirect}`);
+        this.props.history.push(`/login`);
+      } else {
+        this.forceUpdate();
       }
     }
 
     render() {
-      return this.props.user
+      return this.props.ready && this.props.user
         ? <Component { ...this.props } />
         : null;
     }
@@ -30,6 +25,7 @@ export default function requireAuth(Component) {
 
   return withRouter(connect(
     state => ({
+      ready: state.ready,
       user: state.user,
     })
   )(AuthenticatedComponent));

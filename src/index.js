@@ -10,15 +10,19 @@ import SignIn from './SignIn/SignIn';
 import registerServiceWorker from './registerServiceWorker';
 import { auth } from './services/firebase';
 import { login } from './actions';
-import requireAuth from './services/requireAuth';
 
 const reducer = (state = {}, action) => {
-  console.log('reducer', action)
   switch (action.type) {
     case 'LOGIN':
       return {
         ...state,
         user: action.payload,
+        ready: true,
+      }
+    case 'LOGOUT':
+      return {
+        ...state,
+        user: null,
       }
     default:
       return state;
@@ -26,7 +30,8 @@ const reducer = (state = {}, action) => {
 }
 
 const store = createStore(reducer, {
-  user: {},
+  ready: false,
+  user: null,
 });
 
 auth.onAuthStateChanged(user => store.dispatch(login(user)));

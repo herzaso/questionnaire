@@ -1,12 +1,12 @@
 import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import axios from 'axios';
-
+import requireAuth from '../services/requireAuth';
 import Header from '../Header/Header';
 import Category from '../Category/Category';
 import './dashboard.css';
 
-export default class Dashboard extends React.Component {
+class Dashboard extends React.Component {
 
   state = {
     categories: []
@@ -15,14 +15,12 @@ export default class Dashboard extends React.Component {
   componentDidMount() {
     axios.get(`https://us-central1-mr-sinister.cloudfunctions.net/quizes`)
       .then(res => {
-        console.log("res.data", res.data)
         const categories = res.data;
         this.setState({ categories });
       })
   }
 
   render() {
-
     return (
       <Container>
 
@@ -35,8 +33,8 @@ export default class Dashboard extends React.Component {
 
         <Row>
           {this.state.categories.map((data, i) =>
-            <Col sm="6" md="4">
-              <Category content={data} key={i} />
+            <Col sm="6" md="4" key={i}>
+              <Category content={data} />
             </Col>
           )}
         </Row>
@@ -45,3 +43,5 @@ export default class Dashboard extends React.Component {
     );
   }
 }
+
+export default requireAuth(Dashboard);
