@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
-import SignIn from './SignIn/SignIn';
+import Dashboard from './Dashboard/Dashboard';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<SignIn />, document.getElementById('root'));
+ReactDOM.render(<Dashboard />, document.getElementById('root'));
 registerServiceWorker();
