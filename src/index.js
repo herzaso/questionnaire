@@ -2,15 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
-<<<<<<< HEAD
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import Dashboard from './Dashboard/Dashboard';
 import SignIn from './SignIn/SignIn';
-=======
-import Dashboard from './Dashboard/Dashboard';
->>>>>>> e974df672bad30bd2c4c445b1c4a81b68b5ffc82
 import registerServiceWorker from './registerServiceWorker';
 import { auth } from './services/firebase';
 import { login } from './actions';
@@ -46,8 +42,4 @@ ReactDOM.render((
   </Provider>
   ), document.getElementById('root'));
 
-<<<<<<< HEAD
-=======
-ReactDOM.render(<Dashboard />, document.getElementById('root'));
->>>>>>> e974df672bad30bd2c4c445b1c4a81b68b5ffc82
 registerServiceWorker();
