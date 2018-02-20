@@ -11,3 +11,8 @@ export const setCategories = payload => {
     payload
   }
 }
+export const logout = () => {
+  return {
+    type: 'LOGOUT',
+  }
+}

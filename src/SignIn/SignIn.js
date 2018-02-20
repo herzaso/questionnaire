@@ -3,7 +3,6 @@ import React from 'react';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import firebase from 'firebase';
 import { auth } from '../services/firebase';
-import { connect } from 'react-redux';
 
 const uiConfig = {
   // We will display Google and Facebook as auth providers.
@@ -25,8 +24,4 @@ class SignIn extends React.Component {
   }
 }
 
-export default connect(
-  state => ({
-    user: state.user,
-  })
-)(SignIn);
+export default SignIn;

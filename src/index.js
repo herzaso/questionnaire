@@ -11,7 +11,6 @@ import Quiz from './Quiz/Quiz';
 import registerServiceWorker from './registerServiceWorker';
 import { auth } from './services/firebase';
 import { login } from './actions';
-import requireAuth from './services/requireAuth';
 
 const reducer = (state = {}, action) => {
   console.log('reducer', action.type, action)
@@ -20,6 +19,12 @@ const reducer = (state = {}, action) => {
       return {
         ...state,
         user: action.payload,
+        ready: true,
+      }
+    case 'LOGOUT':
+      return {
+        ...state,
+        user: null,
       }
     case 'SET_CATEGORIES':
       return {
@@ -32,10 +37,10 @@ const reducer = (state = {}, action) => {
 }
 
 const store = createStore(reducer, {
-  user: {},
-  categories: []
-}, 
-window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+  ready: false,
+  user: null,
+}
+,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 auth.onAuthStateChanged(user => store.dispatch(login(user)));
 

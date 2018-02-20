@@ -1,10 +1,11 @@
 import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import axios from 'axios';
-import { connect } from 'react-redux';
+import requireAuth from '../services/requireAuth';
 import Header from '../Header/Header';
 import Category from '../Category/Category';
 import { setCategories } from '../actions';
+import {connect} from 'react-redux';
 import './dashboard.css';
 
 class Dashboard extends React.Component {
@@ -26,7 +27,6 @@ class Dashboard extends React.Component {
   }
 
   render() {
-
     return (
       <Container>
 
@@ -50,6 +50,6 @@ class Dashboard extends React.Component {
   }
 }
 
-export default connect(null, {
+export default requireAuth(connect(null, {
   setCategories
-})(Dashboard);
+})(Dashboard));
