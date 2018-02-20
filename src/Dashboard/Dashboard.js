@@ -13,9 +13,11 @@ export default class Dashboard extends React.Component {
   }
 
   componentDidMount() {
+    /**
+     * Get categories
+     */
     axios.get(`https://us-central1-mr-sinister.cloudfunctions.net/quizes`)
       .then(res => {
-        console.log("res.data", res.data)
         const categories = res.data;
         this.setState({ categories });
       })
@@ -35,7 +37,7 @@ export default class Dashboard extends React.Component {
 
         <Row>
           {this.state.categories.map((data, i) =>
-            <Col sm="6" md="4">
+            <Col sm="6" md="4" key={i}>
               <Category content={data} key={i} />
             </Col>
           )}
