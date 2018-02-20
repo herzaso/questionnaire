@@ -7,7 +7,7 @@ import { setCategories } from '../actions';
 import {connect} from 'react-redux';
 import './dashboard.css';
 
-import { db } from '../services/firebase';
+import { auth, db } from '../services/firebase';
 
 class Dashboard extends React.Component {
 
@@ -17,9 +17,10 @@ class Dashboard extends React.Component {
 
   componentDidMount() {
     /**
-     * Get categories from Firebase
+     * Get user's categories from Firebase
      */
-    var dbref = db.ref('/').once('value').then(
+    const userUid = auth.currentUser.uid;
+    const dbref = db.ref('/users/' + userUid).once('value').then(
       data => {
         const categories = data.val().categories; 
         this.setState({ categories });
