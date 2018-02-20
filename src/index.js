@@ -1,7 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import 'bootstrap/dist/css/bootstrap.css';
-import './index.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
@@ -11,6 +9,8 @@ import Quiz from './Quiz/Quiz';
 import registerServiceWorker from './registerServiceWorker';
 import { auth } from './services/firebase';
 import { login } from './actions';
+import 'bootstrap/dist/css/bootstrap.css';
+import './index.css';
 
 const reducer = (state = {}, action) => {
   console.log('reducer', action.type, action)

@@ -2,6 +2,10 @@
   float: right;
 }
 
+.header .btn {
+  margin-left: 15px;
+}
+
 .jumbotron {
     padding-top: 1rem;
     padding-bottom: 1rem
