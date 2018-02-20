@@ -4,7 +4,7 @@ import { Card, CardTitle, Button } from 'reactstrap';
 const Category = (props) => {
 
   const {content} = props;
-  
+
   const cardStyle = {
       background: content.theme
   };
