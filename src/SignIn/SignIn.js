@@ -2,17 +2,9 @@
 import React from 'react';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import firebase from 'firebase';
+import firebaseConf from "../config/firebase.json";
 
-// Configure Firebase.
-const config = {
-    apiKey: "AIzaSyCbQeoowrOrgvphxXMwFivDubHFPvw0D0U",
-    authDomain: "mr-sinister.firebaseapp.com",
-    databaseURL: "https://mr-sinister.firebaseio.com",
-    projectId: "mr-sinister",
-    storageBucket: "mr-sinister.appspot.com",
-    messagingSenderId: "83324194011"
-};
-firebase.initializeApp(config);
+firebase.initializeApp(firebaseConf);
 
 export default class SignIn extends React.Component {
 
