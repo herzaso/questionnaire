@@ -1,12 +1,13 @@
 import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
-import axios from 'axios';
 import requireAuth from '../services/requireAuth';
 import Header from '../Header/Header';
 import Category from '../Category/Category';
 import { setCategories } from '../actions';
 import {connect} from 'react-redux';
 import './dashboard.css';
+
+import { db } from '../services/firebase';
 
 class Dashboard extends React.Component {
 
@@ -16,14 +17,15 @@ class Dashboard extends React.Component {
 
   componentDidMount() {
     /**
-     * Get categories
+     * Get categories from Firebase
      */
-    axios.get(`https://us-central1-mr-sinister.cloudfunctions.net/quizes`)
-      .then(res => {
-        const categories = res.data;
+    var dbref = db.ref('/').once('value').then(
+      data => {
+        const categories = data.val().categories; 
         this.setState({ categories });
         this.props.setCategories(categories)
-      })
+      }
+    );
   }
 
   render() {
@@ -38,9 +40,9 @@ class Dashboard extends React.Component {
         </Row>
 
         <Row>
-          {this.state.categories.map((data, i) =>
+          {Object.keys(this.state.categories).map((i) =>
             <Col sm="6" md="4" key={i}>
-              <Category content={data} key={i} />
+              <Category content={this.state.categories[i]} key={i} />
             </Col>
           )}
         </Row>
