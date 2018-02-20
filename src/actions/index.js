@@ -4,3 +4,10 @@ export const login = payload => {
     payload
   }
 }
+
+export const setCategories = payload => {
+  return {
+    type: 'SET_CATEGORIES',
+    payload
+  }
+}

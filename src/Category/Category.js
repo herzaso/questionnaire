@@ -5,6 +5,8 @@ const Category = (props) => {
 
   const {content} = props;
 
+  console.log("category content", content)
+
   const cardStyle = {
       background: content.theme
   };

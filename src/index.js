@@ -7,19 +7,25 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import Dashboard from './Dashboard/Dashboard';
 import SignIn from './SignIn/SignIn';
+import Quiz from './Quiz/Quiz';
 import registerServiceWorker from './registerServiceWorker';
 import { auth } from './services/firebase';
 import { login } from './actions';
 import requireAuth from './services/requireAuth';
 
 const reducer = (state = {}, action) => {
-  console.log('reducer', action)
+  console.log('reducer', action.type, action)
   switch (action.type) {
     case 'LOGIN':
       return {
         ...state,
         user: action.payload,
       }
+    case 'SET_CATEGORIES':
+      return {
+        ...state,
+        categories: action.payload,
+      }  
     default:
       return state;
   }
@@ -27,7 +33,9 @@ const reducer = (state = {}, action) => {
 
 const store = createStore(reducer, {
   user: {},
-});
+  categories: []
+}, 
+window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 auth.onAuthStateChanged(user => store.dispatch(login(user)));
 
@@ -37,6 +45,7 @@ ReactDOM.render((
       <Switch>
         <Route path='/login' component={SignIn} />
         <Route exact path='/' component={Dashboard} />
+        <Route path='/quiz' component={Quiz} />
       </Switch>
     </BrowserRouter>
   </Provider>

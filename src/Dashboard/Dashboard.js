@@ -1,12 +1,13 @@
 import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import axios from 'axios';
-
+import { connect } from 'react-redux';
 import Header from '../Header/Header';
 import Category from '../Category/Category';
+import { setCategories } from '../actions';
 import './dashboard.css';
 
-export default class Dashboard extends React.Component {
+class Dashboard extends React.Component {
 
   state = {
     categories: []
@@ -20,6 +21,7 @@ export default class Dashboard extends React.Component {
       .then(res => {
         const categories = res.data;
         this.setState({ categories });
+        this.props.setCategories(categories)
       })
   }
 
@@ -47,3 +49,7 @@ export default class Dashboard extends React.Component {
     );
   }
 }
+
+export default connect(null, {
+  setCategories
+})(Dashboard);
