@@ -30,7 +30,7 @@ const reducer = (state = {}, action) => {
       return {
         ...state,
         categories: action.payload,
-      }  
+      }
     default:
       return state;
   }
@@ -39,8 +39,7 @@ const reducer = (state = {}, action) => {
 const store = createStore(reducer, {
   ready: false,
   user: null,
-}
-,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+}, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 auth.onAuthStateChanged(user => store.dispatch(login(user)));
 
@@ -50,7 +49,7 @@ ReactDOM.render((
       <Switch>
         <Route path='/login' component={SignIn} />
         <Route exact path='/' component={Dashboard} />
-        <Route path='/quiz' component={Quiz} />
+        <Route path='/category/:id/:num' component={Quiz} />
       </Switch>
     </BrowserRouter>
   </Provider>

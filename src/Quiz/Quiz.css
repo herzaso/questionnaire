@@ -1,0 +1,13 @@
+.question {
+  font-style: bold;
+}
+
+.answers {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.answers li label {
+  text-indent: 10px;
+}
